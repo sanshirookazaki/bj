@@ -13,6 +13,7 @@ func New() TalonBuilder {
 
 type TalonBuilder interface {
 	Build() Talon
+	TalonPrepare() map[string]int
 }
 
 func (tb *talonBuiler) Build() Talon {
@@ -20,6 +21,10 @@ func (tb *talonBuiler) Build() Talon {
 		card: tb.card,
 		num:  tb.num,
 	}
+}
+
+func (tb *talonBuiler) TalonPrepare() (talon map[string]int) {
+	cardType = ["A", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
 }
 
 type talon struct {
