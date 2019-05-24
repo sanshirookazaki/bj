@@ -1,9 +1,11 @@
 package card
 
+import "fmt"
+
 type Talon interface{}
 
 type talonBuiler struct {
-	card map[string]int // "カードの種類":残り
+	card // "カードの種類":残り
 	num  int
 }
 
@@ -13,7 +15,7 @@ func New() TalonBuilder {
 
 type TalonBuilder interface {
 	Build() Talon
-	TalonPrepare() map[string]int
+	TalonPrepare() card
 }
 
 func (tb *talonBuiler) Build() Talon {
@@ -23,11 +25,21 @@ func (tb *talonBuiler) Build() Talon {
 	}
 }
 
-func (tb *talonBuiler) TalonPrepare() (talon map[string]int) {
-	cardType = ["A", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
+func (tb *talonBuiler) TalonPrepare() (talon card) {
+	cardType := []string{"A", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"}
+	for cardtype := range cardType {
+		fmt.Println(cardtype)
+	}
+	return
 }
 
+type card struct {
+	state map[string]int
+}
+
+type cards []card
+
 type talon struct {
-	card map[string]int
-	num  int
+	cards
+	num int
 }
