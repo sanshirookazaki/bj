@@ -9,6 +9,6 @@ import (
 func main() {
 	fmt.Println("Hello BlackJack!")
 	builder := card.New()
-	talon := builder.Build()
+	talon := builder.TalonPrepare().Build()
 	fmt.Println(talon)
 }
