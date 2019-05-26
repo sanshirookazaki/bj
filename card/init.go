@@ -1,9 +1,6 @@
 package card
 
-import "fmt"
-
 type Talon interface {
-	Deal()
 }
 
 type talonBuiler struct {
@@ -29,8 +26,10 @@ func (tb *talonBuiler) Build() Talon {
 
 func (tb *talonBuiler) TalonPrepare() TalonBuilder {
 	cardType := []string{"A", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"}
-	for cardtype := range cardType {
-		fmt.Println(cardtype)
+	var initCard card
+	initCard.state = cardType
+	for i := 0; i < 4; i++ {
+		tb.cards = append(tb.cards, initCard)
 	}
 	return tb
 }
@@ -42,10 +41,6 @@ type card struct {
 type cards []card
 
 type talon struct {
-	cards cards
-	num   int
-}
-
-func (t *talon) Deal() {
-	fmt.Println("talon!")
+	cards
+	num int
 }
