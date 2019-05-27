@@ -1,6 +1,9 @@
 package card
 
+import "fmt"
+
 type Talon interface {
+	Deal()
 }
 
 type talonBuiler struct {
@@ -43,4 +46,8 @@ type cards []card
 type talon struct {
 	cards
 	num int
+}
+
+func (t *talon) Deal() {
+	fmt.Println("Dealed!")
 }

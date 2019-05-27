@@ -11,4 +11,5 @@ func main() {
 	builder := card.New()
 	talon := builder.TalonPrepare().Build()
 	fmt.Println(talon)
+	talon.Deal()
 }
