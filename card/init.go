@@ -1,6 +1,9 @@
 package card
 
-import "fmt"
+import (
+	"fmt"
+	"math/rand"
+)
 
 type Talon interface {
 	Deal()
@@ -31,6 +34,10 @@ func (tb *talonBuiler) TalonPrepare() TalonBuilder {
 	cardType := []string{"A", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"}
 	var initCard card
 	initCard.state = cardType
+	// cards[0] spade
+	// cards[1] heart
+	// cards[2] diamond
+	// cards[3] clover
 	for i := 0; i < 4; i++ {
 		tb.cards = append(tb.cards, initCard)
 	}
@@ -49,5 +56,5 @@ type talon struct {
 }
 
 func (t *talon) Deal() {
-	fmt.Println("Dealed!")
+	fmt.Println("Dealed!", t.cards[0], rand.Intn(4))
 }
