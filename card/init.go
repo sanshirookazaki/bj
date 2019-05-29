@@ -3,6 +3,8 @@ package card
 import (
 	"fmt"
 	"math/rand"
+	"strconv"
+	"time"
 )
 
 type Talon interface {
@@ -11,7 +13,6 @@ type Talon interface {
 
 type talonBuiler struct {
 	cards // "カードの種類":残り
-	num   int
 }
 
 func New() TalonBuilder {
@@ -26,7 +27,6 @@ type TalonBuilder interface {
 func (tb *talonBuiler) Build() Talon {
 	return &talon{
 		cards: tb.cards,
-		num:   tb.num,
 	}
 }
 
@@ -52,9 +52,26 @@ type cards []card
 
 type talon struct {
 	cards
-	num int
 }
 
 func (t *talon) Deal() {
-	fmt.Println("Dealed!", t.cards[0], rand.Intn(4))
+	rand.Seed(time.Now().UnixNano())
+	// deal 2 cards to player and host
+	for i := 0; i < 2; i++ {
+		mark := rand.Intn(4)
+		num := strconv.Itoa(rand.Intn(14))
+		if contains(t.cards[mark].state, num) {
+			fmt.Println("Deal", num)
+		}
+	}
+
+}
+
+func contains(s []string, e string) bool {
+	for _, v := range s {
+		if e == v {
+			return true
+		}
+	}
+	return false
 }

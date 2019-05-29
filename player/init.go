@@ -1,10 +1,15 @@
 package player
 
+import "fmt"
+
 type player struct {
 	hand []string
 }
 
-type Player interface{}
+type Player interface {
+	Draw(string)
+	Open()
+}
 
 type playerBuilder struct {
 	hand []string
@@ -16,7 +21,6 @@ func New() PlayerBuilder {
 
 type PlayerBuilder interface {
 	Build() Player
-	Draw(string) PlayerBuilder
 }
 
 func (p *playerBuilder) Build() Player {
@@ -25,7 +29,10 @@ func (p *playerBuilder) Build() Player {
 	}
 }
 
-func (p *playerBuilder) Draw(card string) PlayerBuilder {
+func (p *player) Draw(card string) {
 	p.hand = append(p.hand, card)
-	return p
+}
+
+func (p *player) Open() {
+	fmt.Println(p.hand)
 }
