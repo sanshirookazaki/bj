@@ -16,7 +16,7 @@ func New() PlayerBuilder {
 
 type PlayerBuilder interface {
 	Build() Player
-	PlayerPrepare() PlayerBuilder
+	Draw(string) PlayerBuilder
 }
 
 func (p *playerBuilder) Build() Player {
@@ -25,6 +25,7 @@ func (p *playerBuilder) Build() Player {
 	}
 }
 
-func (p *playerBuilder) PlayerPrepare() PlayerBuilder {
+func (p *playerBuilder) Draw(card string) PlayerBuilder {
+	p.hand = append(p.hand, card)
 	return p
 }
