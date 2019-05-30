@@ -8,7 +8,7 @@ import (
 )
 
 type Talon interface {
-	Deal()
+	Deal() ([]int, []string)
 }
 
 type talonBuiler struct {
@@ -31,7 +31,7 @@ func (tb *talonBuiler) Build() Talon {
 }
 
 func (tb *talonBuiler) TalonPrepare() TalonBuilder {
-	cardType := []string{"A", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"}
+	cardType := []string{"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"}
 	var initCard card
 	initCard.state = cardType
 	// cards[0] spade
@@ -54,17 +54,31 @@ type talon struct {
 	cards
 }
 
-func (t *talon) Deal() {
+func (t *talon) Deal() (marks []int, nums []string) {
 	rand.Seed(time.Now().UnixNano())
+
 	// deal 2 cards to player and host
 	for i := 0; i < 2; i++ {
 		mark := rand.Intn(4)
-		num := strconv.Itoa(rand.Intn(14))
+		num := strconv.Itoa(rand.Intn(13) + 1) // 1 ~ 13
+		switch num {
+		case "1":
+			num = "A"
+		case "11":
+			num = "J"
+		case "12":
+			num = "Q"
+		case "13":
+			num = "K"
+		}
+		fmt.Println(num)
 		if contains(t.cards[mark].state, num) {
-			fmt.Println("Deal", num)
+			marks = append(marks, mark)
+			nums = append(nums, num)
+			t.cards[mark].state = remove(t.cards[mark].state, num)
 		}
 	}
-
+	return marks, nums
 }
 
 func contains(s []string, e string) bool {
@@ -74,4 +88,13 @@ func contains(s []string, e string) bool {
 		}
 	}
 	return false
+}
+
+func remove(s []string, e string) (result []string) {
+	for _, i := range s {
+		if i != e {
+			result = append(result, i)
+		}
+	}
+	return result
 }
