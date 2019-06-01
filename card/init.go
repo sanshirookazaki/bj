@@ -8,7 +8,7 @@ import (
 )
 
 type Talon interface {
-	Deal() ([]int, []string)
+	Deal(int) ([]int, []string)
 }
 
 type talonBuiler struct {
@@ -54,11 +54,11 @@ type talon struct {
 	cards
 }
 
-func (t *talon) Deal() (marks []int, nums []string) {
+func (t *talon) Deal(loop int) (marks []int, nums []string) {
 	rand.Seed(time.Now().UnixNano())
 
 	// deal 2 cards to player and host
-	for i := 0; i < 2; i++ {
+	for i := 0; i < loop; i++ {
 		mark := rand.Intn(4)
 		num := strconv.Itoa(rand.Intn(13) + 1) // 1 ~ 13
 		switch num {
