@@ -1,7 +1,6 @@
 package card
 
 import (
-	"fmt"
 	"math/rand"
 	"strconv"
 	"time"
@@ -58,7 +57,7 @@ func (t *talon) Deal(loop int) (marks []int, nums []string) {
 	rand.Seed(time.Now().UnixNano())
 
 	// deal 2 cards to player and host
-	for i := 0; i < loop; i++ {
+	for i := 0; i < loop; {
 		mark := rand.Intn(4)
 		num := strconv.Itoa(rand.Intn(13) + 1) // 1 ~ 13
 		switch num {
@@ -71,11 +70,11 @@ func (t *talon) Deal(loop int) (marks []int, nums []string) {
 		case "13":
 			num = "K"
 		}
-		fmt.Println(num)
 		if contains(t.cards[mark].state, num) {
 			marks = append(marks, mark)
 			nums = append(nums, num)
 			t.cards[mark].state = remove(t.cards[mark].state, num)
+			i++
 		}
 	}
 	return marks, nums

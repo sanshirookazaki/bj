@@ -12,8 +12,8 @@ type player struct {
 
 type Player interface {
 	Draw(string)
-	Open()
-	Compute()
+	Open(int)
+	Compute() int
 }
 
 type playerBuilder struct {
@@ -40,27 +40,27 @@ func (p *player) Draw(card string) {
 	p.hand = append(p.hand, card)
 }
 
-func (p *player) Compute() {
-	var result int
+func (p *player) Compute() (result int) {
 	for _, i := range p.hand {
 		var num int
 		switch i {
 		case "A":
 			num = 1
 		case "J":
-			num = 11
+			num = 10
 		case "Q":
-			num = 12
+			num = 10
 		case "K":
-			num = 13
+			num = 10
 		default:
 			num, _ = strconv.Atoi(i)
 		}
 		result += num
 	}
 	p.result = result
+	return result
 }
 
-func (p *player) Open() {
-	fmt.Println(p.hand, p.result)
+func (p *player) Open(result int) {
+	fmt.Println(result)
 }
