@@ -5,18 +5,21 @@ import (
 )
 
 type player struct {
-	hand   []string
-	result int
+	hand  []string
+	sum   int
+	score int
 }
 
 type Player interface {
 	Draw(string)
+	Sum() int
 	Compute() int
 }
 
 type playerBuilder struct {
-	hand   []string
-	result int
+	hand  []string
+	sum   int
+	score int
 }
 
 func New() PlayerBuilder {
@@ -29,8 +32,9 @@ type PlayerBuilder interface {
 
 func (p *playerBuilder) Build() Player {
 	return &player{
-		hand:   p.hand,
-		result: p.result,
+		hand:  p.hand,
+		sum:   p.sum,
+		score: p.score,
 	}
 }
 
@@ -38,7 +42,7 @@ func (p *player) Draw(card string) {
 	p.hand = append(p.hand, card)
 }
 
-func (p *player) Compute() (result int) {
+func (p *player) Sum() (sum int) {
 	for _, i := range p.hand {
 		var num int
 		switch i {
@@ -53,8 +57,17 @@ func (p *player) Compute() (result int) {
 		default:
 			num, _ = strconv.Atoi(i)
 		}
-		result += num
+		sum += num
 	}
-	p.result = result
-	return result
+	p.sum = sum
+	return sum
+}
+
+func (p *player) Compute() (score int) {
+	sum := p.Sum()
+	score = 21 - sum
+	if score < 0 {
+		score = -1
+	}
+	return score
 }
