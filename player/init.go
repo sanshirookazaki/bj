@@ -1,7 +1,6 @@
 package player
 
 import (
-	"fmt"
 	"strconv"
 )
 
@@ -12,7 +11,6 @@ type player struct {
 
 type Player interface {
 	Draw(string)
-	Open(int)
 	Compute() int
 }
 
@@ -59,8 +57,4 @@ func (p *player) Compute() (result int) {
 	}
 	p.result = result
 	return result
-}
-
-func (p *player) Open(result int) {
-	fmt.Println(result)
 }

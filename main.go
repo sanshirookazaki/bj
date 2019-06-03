@@ -28,7 +28,7 @@ func main() {
 		dealer.Draw(i)
 	}
 	fmt.Println("player start")
-	player.Open(player.Compute())
+	fmt.Println(player.Compute())
 
 	for dealer.Compute() < 18 {
 		fmt.Println("dealer draw")
@@ -37,7 +37,7 @@ func main() {
 	}
 
 	fmt.Println("dealer")
-	dealer.Open(dealer.Compute())
+	fmt.Println(dealer.Compute())
 }
 
 func switchMark(markNum int) (mark string) {
