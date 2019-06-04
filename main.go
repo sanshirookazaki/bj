@@ -53,14 +53,15 @@ func main() {
 			player.Draw(nums[0])
 			fmt.Println("Draw", switchMark(marks[0]), nums[0])
 			fmt.Println("手札の合計は", player.Sum())
+			if player.Compute() == -1 {
+				break
+			}
 		}
 
 		if dealer.Sum() < 18 {
 			fmt.Println("dealer draw")
 			marks, nums = talon.Deal(1)
 			dealer.Draw(nums[0])
-		} else {
-			fmt.Println("dealer stop")
 		}
 	}
 
