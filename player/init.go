@@ -44,10 +44,11 @@ func (p *player) Draw(card string) {
 
 func (p *player) Sum() (sum int) {
 	for _, i := range p.hand {
-		var num int
+		var num, a int
 		switch i {
 		case "A":
-			num = 1
+			num = 11
+			a += 1
 		case "J":
 			num = 10
 		case "Q":
@@ -58,6 +59,9 @@ func (p *player) Sum() (sum int) {
 			num, _ = strconv.Atoi(i)
 		}
 		sum += num
+		if sum > 21 && a > 0 {
+			sum = sum - 10
+		}
 	}
 	p.sum = sum
 	return sum
