@@ -22,3 +22,14 @@ func TestRemove(t *testing.T) {
 	}
 	t.Log("Pass remove func")
 }
+
+func TestTalonPrepare(t *testing.T) {
+	cardbuilder := New()
+	talon := cardbuilder.TalonPrepare().Build()
+	marks, nums := talon.Deal(1)
+	if 0 > marks[0] || marks[0] > 3 {
+		t.Fatalf("error: %v %v", marks, nums)
+	}
+
+	t.Log("Pass TalonPrepare func")
+}
