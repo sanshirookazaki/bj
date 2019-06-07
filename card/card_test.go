@@ -23,7 +23,7 @@ func TestRemove(t *testing.T) {
 	t.Log("Pass remove func")
 }
 
-func TestTalonPrepare(t *testing.T) {
+func TestDeal(t *testing.T) {
 	cardbuilder := New()
 	talon := cardbuilder.TalonPrepare().Build()
 	marks, nums := talon.Deal(1)
@@ -31,5 +31,5 @@ func TestTalonPrepare(t *testing.T) {
 		t.Fatalf("error: %v %v", marks, nums)
 	}
 
-	t.Log("Pass TalonPrepare func")
+	t.Log("Pass Deal func")
 }
