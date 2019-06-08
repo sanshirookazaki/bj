@@ -80,7 +80,7 @@ func (t *talon) Deal(loop int) (marks []int, nums []string) {
 	return marks, nums
 }
 
-func contains(s []string, e string) bool {
+func contains(s interface{}, e interface{}) bool {
 	for _, v := range s {
 		if e == v {
 			return true
