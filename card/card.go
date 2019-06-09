@@ -80,23 +80,32 @@ func (t *talon) Deal(loop int) (marks []int, nums []string) {
 	return marks, nums
 }
 
-func contains(s interface{}, e interface{}) bool {
+func contains(s interface{}, e ...interface{}) bool {
+	var c int
 	switch l := s.(type) {
 	case []string:
 		{
 			for _, si := range l {
-				if si == e {
-					return true
+				for _, ei := range e {
+					if si == ei {
+						c++
+					}
 				}
 			}
 		}
 	case []int:
 		for _, si := range l {
-			if si == e {
-				return true
+			for _, ei := range e {
+				if si == ei {
+					c++
+				}
 			}
 		}
 	}
+	if c == len(e) {
+		return true
+	}
+
 	return false
 }
 

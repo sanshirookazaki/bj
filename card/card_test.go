@@ -26,9 +26,27 @@ func TestRemove(t *testing.T) {
 func TestDeal(t *testing.T) {
 	cardbuilder := New()
 	talon := cardbuilder.TalonPrepare().Build()
-	marks, nums := talon.Deal(1)
-	if 0 > marks[0] || marks[0] > 3 {
-		t.Fatalf("error: %v %v", marks, nums)
+	marks, nums := talon.Deal(2)
+	// check marks
+	for _, v := range marks {
+		if v < 0 || v > 3 {
+			t.Fatalf("error: %v ", v)
+		}
+	}
+
+	// check nums
+	cardType := []string{"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"}
+	var c int
+	for _, n := range nums {
+		for _, ct := range cardType {
+			if n == ct {
+				c++
+			}
+		}
+	}
+
+	if !(c == len(nums)) {
+		t.Fatalf("error: deal cards %v %v", marks, nums)
 	}
 
 	t.Log("Pass Deal func")
