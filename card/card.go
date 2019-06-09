@@ -81,9 +81,20 @@ func (t *talon) Deal(loop int) (marks []int, nums []string) {
 }
 
 func contains(s interface{}, e interface{}) bool {
-	for _, v := range s {
-		if e == v {
-			return true
+	switch l := s.(type) {
+	case []string:
+		{
+			for _, si := range l {
+				if si == e {
+					return true
+				}
+			}
+		}
+	case []int:
+		for _, si := range l {
+			if si == e {
+				return true
+			}
 		}
 	}
 	return false
