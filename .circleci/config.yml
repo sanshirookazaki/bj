@@ -7,4 +7,7 @@ jobs:
     steps:
       - checkout
       - run: go test -v ./...
+      - run: go get github.com/mattn/goveralls
+      - run: go test -v -cover -race -coverprofile=./coverage.out
+      - run: $GOPATH/bin/goveralls -coverprofile=./coverage.out -service=circle-ci -repotoken=$COVERALLS_TOKEN
       - run: go build -v
