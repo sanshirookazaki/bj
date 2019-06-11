@@ -74,19 +74,7 @@ func main() {
 	fmt.Println("ディーラーの手札は", dealer.Sum())
 	playerScore := player.Compute()
 	dealerScore := dealer.Compute()
-	switch {
-
-	case playerScore == dealerScore:
-		fmt.Println("引き分け")
-	case playerScore == -1 && dealerScore >= 0:
-		fmt.Println("ディーラーの勝ち")
-	case playerScore >= 0 && dealerScore == -1:
-		fmt.Println("あなたの勝ち")
-	case playerScore < dealerScore:
-		fmt.Println("あなたの勝ち")
-	case playerScore > dealerScore:
-		fmt.Println("ディーラーの勝ち")
-	}
+	fmt.Println(bout(playerScore, dealerScore))
 }
 
 func switchMark(markNum int) (mark string) {
@@ -103,4 +91,20 @@ func switchMark(markNum int) (mark string) {
 		mark = ""
 	}
 	return mark
+}
+
+func bout(playerScore, dealerScore int) (result string) {
+	switch {
+	case playerScore == dealerScore:
+		result = "引き分け"
+	case playerScore == -1 && dealerScore >= 0:
+		result = "ディーラーの勝ち"
+	case playerScore >= 0 && dealerScore == -1:
+		result = "あなたの勝ち"
+	case playerScore < dealerScore:
+		result = "あなたの勝ち"
+	case playerScore > dealerScore:
+		result = "ディーラーの勝ち"
+	}
+	return result
 }
