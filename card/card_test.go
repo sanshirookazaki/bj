@@ -14,11 +14,14 @@ func TestContains(t *testing.T) {
 }
 
 func TestRemove(t *testing.T) {
-	a := []string{"a", "bb", "ccc"}
-	result := remove(a, "ccc")
-	expect := []string{"a", "bb"}
-	if !reflect.DeepEqual(result, expect) {
-		t.Fatalf("error: expect %v but result %v", expect, result)
+	a := [][]string{{"a", "bb", "ccc"}, {"aaa", "bb", "c"}, {"a", "a", "a", "b"}}
+	target := []string{"ccc", "d", "a"}
+	expect := [][]string{{"a", "bb"}, {"aaa", "bb", "c"}, {"b"}}
+	for i, _ := range a {
+		result := remove(a[i], target[i])
+		if !reflect.DeepEqual(expect[i], result) {
+			t.Fatalf("error: expect %v but result %v", expect[i], result)
+		}
 	}
 	t.Log("Pass remove func")
 }
