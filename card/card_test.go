@@ -7,8 +7,18 @@ import (
 
 func TestContains(t *testing.T) {
 	a := []string{"a", "bb", "ccc"}
+	b := []int{1, 3, 5, 7, 9}
 	if !contains(a, "bb") {
 		t.Fatalf("error: %v", a)
+	}
+	if contains(a, "c") {
+		t.Fatalf("error: %v", a)
+	}
+	if !contains(b, 5) {
+		t.Fatalf("error: %v", b)
+	}
+	if contains(b, 4) {
+		t.Fatalf("error: %v", b)
 	}
 	t.Log("Pass contains func")
 }
@@ -17,7 +27,7 @@ func TestRemove(t *testing.T) {
 	a := [][]string{{"a", "bb", "ccc"}, {"aaa", "bb", "c"}, {"a", "a", "a", "b"}}
 	target := []string{"ccc", "d", "a"}
 	expect := [][]string{{"a", "bb"}, {"aaa", "bb", "c"}, {"b"}}
-	for i, _ := range a {
+	for i := range a {
 		result := remove(a[i], target[i])
 		if !reflect.DeepEqual(expect[i], result) {
 			t.Fatalf("error: expect %v but result %v", expect[i], result)
