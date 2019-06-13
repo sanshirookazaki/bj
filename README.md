@@ -8,3 +8,9 @@ A CLI tool to play blackjack
 ```
 go get -u github.com/sanshirookazaki/bj
 ```
+
+## Usage
+
+```
+$ bj
+```
