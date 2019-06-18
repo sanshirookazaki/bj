@@ -39,7 +39,7 @@ func TestRemove(t *testing.T) {
 func TestDeal(t *testing.T) {
 	cardbuilder := New()
 	talon := cardbuilder.TalonPrepare().Build()
-	marks, nums := talon.Deal(2)
+	marks, nums := talon.Deal(45)
 	// check marks
 	for _, v := range marks {
 		if v < 0 || v > 3 {
