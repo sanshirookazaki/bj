@@ -59,8 +59,10 @@ func (p *player) Sum() (sum int) {
 			num, _ = strconv.Atoi(i)
 		}
 		sum += num
-		if sum > 21 && a > 0 {
-			sum = sum - 10
+		for i := 0; i < a; i++ {
+			if sum > 21 {
+				sum = sum - 10
+			}
 		}
 	}
 	p.sum = sum
