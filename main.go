@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	fmt.Println("Hello BlackJack!")
+	fmt.Println("Start BlackJack!")
 	cardbuilder := card.New()
 	talon := cardbuilder.TalonPrepare().Build()
 
@@ -31,7 +31,10 @@ func main() {
 	fmt.Println("手札の合計は", player.Sum())
 
 	stdin := bufio.NewScanner(os.Stdin)
-	fmt.Println("カードをドローする場合は h 、 引かない場合は s と入力してください")
+	if player.Compute() != 0 {
+		fmt.Println("カードをドローする場合は h 、 引かない場合は s を入力してください")
+	}
+
 	for stdin.Scan() {
 		input := stdin.Text()
 
