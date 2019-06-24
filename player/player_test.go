@@ -21,8 +21,8 @@ func TestSum(t *testing.T) {
 }
 
 func TestCompute(t *testing.T) {
-	hand := [][]string{{"A", "A", "A", "A", "7"}, {"A", "J"}, {"K", "Q"}, {"10", "5"}}
-	result := []int{0, 0, 1, 6}
+	hand := [][]string{{"A", "A", "A", "A", "7"}, {"A", "J"}, {"K", "Q"}, {"10", "5"}, {"10", "A", "A", "Q"}, {"K", "J", "5"}}
+	result := []int{0, 0, 1, 6, -1, -1}
 	for i, cards := range hand {
 		playerbuilder := New()
 		player := playerbuilder.Build()
